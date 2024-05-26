@@ -6,7 +6,6 @@ class Personel:
         self.__departman = departman
         self.__maas = maas
 
-    #get fonk.
     def get_personel_no(self):
         return self.__personel_no
 
@@ -37,6 +36,24 @@ class Personel:
 
     def set_maas(self, maas):
         self.__maas = maas
+
+    def to_dict(self):
+        return {
+            "personel_no": self.get_personel_no(),
+            "ad": self.get_ad(),
+            "soyad": self.get_soyad(),
+            "departman": self.get_departman(),
+            "maas": self.get_maas(),
+            "uzmanlik": None,
+            "deneyim_yili": None,
+            "hastane": None,
+            "calisma_saati": None,
+            "sertifika": None,
+            "hasta_no": None,
+            "dogum_tarihi": None,
+            "hastalik": None,
+            "tedavi": None
+        }
 
     def __str__(self):
         return (f"PERSONEL NO: {self.__personel_no}\n"
