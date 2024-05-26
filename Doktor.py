@@ -1,4 +1,5 @@
 from Personel import Personel
+
 class Doktor(Personel):
     def __init__(self, personel_no, ad, soyad, departman, maas, uzmanlik, deneyim_yili, hastane):
         super().__init__(personel_no, ad, soyad, departman, maas)
@@ -6,7 +7,6 @@ class Doktor(Personel):
         self.__deneyim_yili = deneyim_yili
         self.__hastane = hastane
 
-    # Get fonksiyonları
     def get_uzmanlik(self):
         return self.__uzmanlik
 
@@ -25,6 +25,15 @@ class Doktor(Personel):
 
     def set_hastane(self, hastane):
         self.__hastane = hastane
+
+    def to_dict(self):
+        data = super().to_dict()
+        data.update({
+            "uzmanlik": self.get_uzmanlik(),
+            "deneyim_yili": self.get_deneyim_yili(),
+            "hastane": self.get_hastane()
+        })
+        return data
 
     def __str__(self):
         return (super().__str__() + f"\nUZMANLIK: {self.__uzmanlik}\n"
