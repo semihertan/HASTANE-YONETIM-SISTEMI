@@ -7,7 +7,6 @@ class Hasta:
         self.__hastalik = hastalik
         self.__tedavi = tedavi
 
-    #get
     def get_hasta_no(self):
         return self.__hasta_no
 
@@ -44,6 +43,24 @@ class Hasta:
 
     def set_tedavi(self, tedavi):
         self.__tedavi = tedavi
+
+    def to_dict(self):
+        return {
+            "personel_no": None,
+            "ad": self.get_ad(),
+            "soyad": self.get_soyad(),
+            "departman": None,
+            "maas": None,
+            "uzmanlik": None,
+            "deneyim_yili": None,
+            "hastane": None,
+            "calisma_saati": None,
+            "sertifika": None,
+            "hasta_no": self.get_hasta_no(),
+            "dogum_tarihi": self.get_dogum_tarihi(),
+            "hastalik": self.get_hastalik(),
+            "tedavi": self.get_tedavi()
+        }
 
     def __str__(self):
         return (f"HASTA NO: {self.__hasta_no}\n"
