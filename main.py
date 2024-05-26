@@ -10,8 +10,8 @@ def main():
         personel2 = Personel(102, "Ayşe", "Kaya", "İnsan Kaynakları", 6000)
 
         # Doktor nesnelerini oluşturma
-        doktor1 = Doktor(101, "Ahmet", "Yılmaz", "Kardiyoloji", 15000, "Kardiyolog", 10, "Acıbadem Hastanesi")
-        doktor2 = Doktor(102, "Ayşe", "Kaya", "Nöroloji", 16000, "Nörolog", 8, "Memorial Hastanesi")
+        doktor1 = Doktor(103, "Mehmet", "Demir", "Kardiyoloji", 15000, "Kardiyolog", 10, "Acıbadem Hastanesi")
+        doktor2 = Doktor(104, "Elif", "Sarı", "Nöroloji", 16000, "Nörolog", 8, "Memorial Hastanesi")
 
         # Hemşire nesnelerini oluşturma
         hemsire1 = Hemsire(201, "Fatma", "Demir", "Yoğun Bakım", 8000, 40, "Sertifikalı Yoğun Bakım", "Özel Hastane")
@@ -19,7 +19,7 @@ def main():
 
         # Hasta nesnelerini oluşturma
         hasta1 = Hasta(301, "Ali", "Yılmaz", "1980-05-15", "Ateş", "İlaç Kullanımı")
-        hasta2 = Hasta(302, "Mehmet", "Kara", "1975-10-20", "Baş Ağrısı", "Dinlenme")
+        hasta2 = Hasta(302, "Mehmet", "Kara", "1995-10-20", "Baş Ağrısı", "Dinlenme")
 
         # Nesneleri yazdırma
         print("Oluşturulan Personeller:")
@@ -46,17 +46,39 @@ def main():
         print("\nHasta 2:")
         print(hasta2)
 
+        pd.set_option('display.max_columns', None)  # Tüm sütunları göster
+        pd.set_option('display.max_rows', None)  # Tüm satırları göster
+        pd.set_option('display.width', None)  # Genişliği otomatik ayarla
+        pd.set_option('display.max_colwidth', None)
 
         data = []
         for obj in [personel1, personel2, doktor1, doktor2, hemsire1, hemsire2, hasta1, hasta2]:
-            data.append(vars(obj))
+            data.append(obj.to_dict())
 
-        df = pd.DataFrame(data)
+        df = pd.DataFrame(data).fillna(0)
         print(df)
+
+        df['dogum_tarihi'] = pd.to_datetime(df['dogum_tarihi'], errors='coerce')  # Doğum tarihi sütununu datetime yap
+        df_filtered = df[(df['dogum_tarihi'] >= '1990-01-01')]
+
+        print("\nDoğum Tarihi 1990 ve Sonrası Olan Hastalar:")
+        print(df_filtered)
+
+        df_filtered_salary = df[df['maas'] > 7000]
+        print("\nMaaşı 7000 TL'nin Üzerinde Olan Personeller:")
+        print(df_filtered_salary)
+
+        experienced_doctors = df[(df['deneyim_yili'] > 5)]
+        print("\n5 Yıldan Fazla Deneyime Sahip Doktorlar:")
+        print(experienced_doctors)
+
+        # Uzmanlık alanlarına göre doktorları gruplandırarak toplam sayıyı hesaplama
+        doctors_grouped_by_specialty = experienced_doctors.groupby('uzmanlik').size()
+        print("\nUzmanlık Alanlarına Göre 5 Yıldan Fazla Deneyime Sahip Doktorların Sayısı:")
+        print(doctors_grouped_by_specialty)
 
     except Exception as e:
         print(f"Bir hata oluştu: {e}")
-
 
 if __name__ == "__main__":
     main()
