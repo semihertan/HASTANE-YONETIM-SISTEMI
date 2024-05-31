@@ -69,3 +69,24 @@ class Hasta:
                 f"DOĞUM TARİHİ: {self.__dogum_tarihi}\n"
                 f"HASTAIK: {self.__hastalik}\n"
                 f"TEDAVİ: {self.__tedavi}")
+
+    def tedavi_suresi_hesapla(self):
+        tedavi_sureleri = {
+            'Ateş': {
+                'İlaç Kullanımı': 3,
+                'Dinlenme': 2
+            },
+            'Baş Ağrısı': {
+                'İlaç Kullanımı': 2,
+                'Dinlenme': 1
+            },
+            'Grip': {
+                'İlaç Kullanımı': 5,
+                'Dinlenme': 3
+            }
+        }
+
+        if self.hastalik in tedavi_sureleri and self.tedavi in tedavi_sureleri[self.hastalik]:
+            return tedavi_sureleri[self.hastalik][self.tedavi]
+        else:
+            return "Bilinmeyen hastalık veya tedavi"
