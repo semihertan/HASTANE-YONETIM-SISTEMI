@@ -1,10 +1,7 @@
 from Personel import Personel
 
 class Doktor(Personel):
-    def __init__(self, personel_no: object, ad: object, soyad: object, departman: object, maas: object,
-                 uzmanlik: object,
-                 deneyim_yili: object,
-                 hastane: object) -> object:
+    def __init__(self, personel_no, ad, soyad, departman, maas, uzmanlik, deneyim_yili, hastane):
         super().__init__(personel_no, ad, soyad, departman, maas)
         self.__uzmanlik = uzmanlik
         self.__deneyim_yili = deneyim_yili
@@ -19,7 +16,6 @@ class Doktor(Personel):
     def get_hastane(self):
         return self.__hastane
 
-    # Set fonksiyonları
     def set_uzmanlik(self, uzmanlik):
         self.__uzmanlik = uzmanlik
 
@@ -39,8 +35,9 @@ class Doktor(Personel):
         return data
 
     def maas_arttir(self, oran):
+        self.maas = self.get_maas()
         self.maas += self.maas * oran / 100
-        print(f"Yeni maaş: {self.maas}")
+        return self.maas
 
     def __str__(self):
         return (super().__str__() + f"\nUZMANLIK: {self.__uzmanlik}\n"

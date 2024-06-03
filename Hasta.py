@@ -85,8 +85,8 @@ class Hasta:
                 'Dinlenme': 3
             }
         }
-
-        if self.hastalik in tedavi_sureleri and self.tedavi in tedavi_sureleri[self.hastalik]:
-            return tedavi_sureleri[self.hastalik][self.tedavi]
+        self.hastalik = self.get_hastalik()
+        if self.hastalik in tedavi_sureleri and self.get_tedavi() in tedavi_sureleri[self.hastalik]:
+            return tedavi_sureleri[self.hastalik][self.get_tedavi()]
         else:
             return "Bilinmeyen hastalık veya tedavi"
