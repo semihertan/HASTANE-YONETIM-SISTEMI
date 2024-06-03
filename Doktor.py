@@ -38,6 +38,10 @@ class Doktor(Personel):
         })
         return data
 
+    def maas_arttir(self, oran):
+        self.maas += self.maas * oran / 100
+        print(f"Yeni maaş: {self.maas}")
+
     def __str__(self):
         return (super().__str__() + f"\nUZMANLIK: {self.__uzmanlik}\n"
                                     f"DENEYİM YILI: {self.__deneyim_yili}\n"
